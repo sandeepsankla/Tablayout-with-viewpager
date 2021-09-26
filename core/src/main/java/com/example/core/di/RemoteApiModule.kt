@@ -69,7 +69,7 @@ class RemoteApiModule {
             .writeTimeout(writeTimeout, TimeUnit.SECONDS)
             .retryOnConnectionFailure(false)
             .addInterceptor(provideTimeoutInterceptor())
-            .addInterceptor(provideHeaderInterceptor())
+            //.addInterceptor(provideHeaderInterceptor()) //todo use later
             .addInterceptor(provideLoggingInterceptor())
             .build()
         }
@@ -88,7 +88,7 @@ class RemoteApiModule {
     @Singleton
     @HeaderInterceptor
     fun provideHeaderInterceptor(): Interceptor {
-      return HeaderInceptor()
+      return com.example.core.util.HeaderInterceptor()
     }
 
 
@@ -142,7 +142,6 @@ class RemoteApiModule {
         return AppLog()
 
     }
-
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)

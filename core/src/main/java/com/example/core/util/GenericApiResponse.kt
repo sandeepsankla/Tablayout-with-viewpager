@@ -11,3 +11,4 @@ data class GenericApiResponse<T> (
     @SerializedName("message") val message: String?,
     @SerializedName("status") val status: Int?
 )
+

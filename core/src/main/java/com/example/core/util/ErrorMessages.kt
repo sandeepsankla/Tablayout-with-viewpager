@@ -7,7 +7,7 @@ import javax.inject.Inject
  * Created by Sandeep Sankla
  */
 class ErrorMessages @Inject constructor(val code : Int?) {
-    @Inject lateinit var appLog: AppLog
+    //@Inject lateinit var appLog: AppLog
     private val TAG = ErrorMessages::class.java.simpleName
     fun getMessage():String {
          if(code == null)  return "Some thing went Wrong. Please try again ErrorCode - $code"
@@ -32,7 +32,7 @@ class ErrorMessages @Inject constructor(val code : Int?) {
                 else -> message = "Some thing went Wrong. Please try again"
             }
 
-             appLog.i(TAG, message)
+            // appLog.i(TAG, message)
             return "$message ErrorCode - $code"
     }
 

@@ -1,9 +1,10 @@
 package com.example.sandeep
 
-import android.util.Log
 import com.example.core.di.FormattedResponse
-import com.example.core.util.GenericApiResponse
+import com.example.sandeep.repo.DetailData
+import com.example.sandeep.repo.DetailResponse
 import com.example.core.util.Resource
+import com.google.gson.Gson
 import javax.inject.Inject
 
 /**
@@ -11,21 +12,16 @@ import javax.inject.Inject
  */
 class MainRemoteSource @Inject constructor(val formattedResponse: FormattedResponse)   {
 
-    suspend fun getWeatherDetails(): Resource<GenericApiResponse<User>> {
 
-        val url = "http://api.weatherstack.com/current?access_key=313510887793bf027cb42a57e9d43d42&query=New York"
-        Log.d("sasa", "in main source")
-        val datares : Resource<GenericApiResponse<User>>  = formattedResponse.GetCall(url, hashMapOf())
-        Log.d("sasa", "$datares")
-        return datares
-    }
-   suspend fun getWeatherDetail(): Resource<Weather> {
-
-        val url = "http://api.weatherstack.com/current?access_key=313510887793bf027cb42a57e9d43d42&query=New York"
-        Log.d("sasa", "in main source")
-        val datares : Resource<Weather>  = formattedResponse.GetCall(url, hashMapOf())
-        Log.d("sasa", "$datares")
-        return datares
+    suspend fun getHomeTabData(page: Int, limit: Int): Resource<ArrayList<DetailData>> {
+        val url = "https://api.punkapi.com/v2/beers"
+        val map = hashMapOf<String, Int>()
+        map.put("page", page)
+        map.put("per_page", limit)
+        val response :Resource<ArrayList<DetailData>> = formattedResponse.GetCall(url, map)
+        val gson  = Gson().toJson(response)
+        val playerArray = Gson().fromJson(gson, DetailResponse::class.java)
+        return Resource.Success(playerArray.data)
     }
 
 

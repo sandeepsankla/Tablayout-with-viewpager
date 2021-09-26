@@ -12,7 +12,7 @@ import javax.inject.Inject
 /**
  * Created by Sandeep Sankla
  */
-class HeaderInceptor @Inject constructor():Interceptor {
+class HeaderInterceptor @Inject constructor():Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val headers = mapOf(
             "Authorization" to "573546c4-2ef5-68d8-d1a8-5f00f1ee4945",

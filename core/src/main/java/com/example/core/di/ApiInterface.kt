@@ -10,7 +10,7 @@ interface ApiInterface {
     suspend fun <T> get(
         @Url endPoint: String,
         @QueryMap(encoded = true) queryParams: Map<String, @JvmSuppressWildcards Any>? = null
-    ): Response<GenericApiResponse<T>>
+    ): Response<T>
 
     @POST
     suspend fun <T> post(

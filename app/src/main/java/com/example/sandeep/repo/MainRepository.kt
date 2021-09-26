@@ -1,10 +1,7 @@
 package com.example.sandeep.repo
 
-import android.util.Log
-import com.example.core.util.GenericApiResponse
 import com.example.core.util.Resource
 import com.example.sandeep.MainRemoteSource
-import com.example.sandeep.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,13 +11,10 @@ import javax.inject.Inject
 class MainRepository @Inject constructor(private val mainRemoteSource: MainRemoteSource) :
     MainRepoSource {
 
-    //private val mainRemoteSource: MainRepoSource
-   override suspend fun getWeatherDetails(): Flow<Resource<GenericApiResponse<User>>> {
-        Log.d("sasa","getCall in repo")
+ override suspend fun getHomeTabData( page:Int, limit:Int): Flow<Resource<ArrayList<DetailData>>> {
         return flow {
             emit(Resource.Loading(true))
-            emit(mainRemoteSource.getWeatherDetails())
-            emit(Resource.Loading(false))
+            emit(mainRemoteSource.getHomeTabData(page, limit))
         }.flowOn(Dispatchers.IO)
     }
 
